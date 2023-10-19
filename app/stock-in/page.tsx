@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import { commonClassName } from "@/constant";
 import { useInventory } from "@/context/InventoryContext";
 import { Product, StockItem } from "@/index";
+import classNames from "classnames";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -15,11 +16,11 @@ const StockIn = () => {
     qty: 0,
   });
 
+  const buttonDisabled = !(newStockIn.productId && newStockIn.qty);
+
   const handleStockIn = () => {
-    if (newStockIn.productId && newStockIn.qty) {
-      stockIn(newStockIn);
-      setNewStockIn({ id: uuidv4(), productId: "", qty: 0 });
-    }
+    stockIn(newStockIn);
+    setNewStockIn({ id: uuidv4(), productId: "", qty: 0 });
   };
 
   const productOptions = data.products.map((product: Product) => (
@@ -30,6 +31,9 @@ const StockIn = () => {
 
   return (
     <Layout title="Stock In">
+      <div className="flex justify-center">
+        {data.stockIns.length === 0 && <p>No Stock Ins</p>}
+      </div>
       <ul>
         {data.stockIns.map((stockIn) => (
           <li className={commonClassName} key={stockIn.id}>
@@ -65,7 +69,13 @@ const StockIn = () => {
             }
           />
         </label>
-        <button className={commonClassName} onClick={handleStockIn}>
+        <button
+          disabled={buttonDisabled}
+          className={classNames(commonClassName, {
+            "bg-gray-200 border-gray-200 cursor-not-allowed": buttonDisabled,
+          })}
+          onClick={handleStockIn}
+        >
           Stock In
         </button>
       </div>

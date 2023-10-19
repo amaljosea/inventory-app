@@ -4,22 +4,23 @@ import Layout from "@/components/Layout";
 import { commonClassName } from "@/constant";
 import { useInventory } from "@/context/InventoryContext";
 import { Product, StockItem } from "@/index";
+import classNames from "classnames";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const StockOut = () => {
   const { data, stockOut } = useInventory();
-  const [newStockIn, setNewStockIn] = useState<StockItem>({
+  const [newStockOut, setNewStockOut] = useState<StockItem>({
     id: uuidv4(),
     productId: "",
     qty: 0,
   });
 
+  const buttonDisabled = !(newStockOut.productId && newStockOut.qty);
+
   const handleStockOut = () => {
-    if (newStockIn.productId && newStockIn.qty) {
-      stockOut(newStockIn);
-      setNewStockIn({ id: uuidv4(), productId: "", qty: 0 });
-    }
+    stockOut(newStockOut);
+    setNewStockOut({ id: uuidv4(), productId: "", qty: 0 });
   };
 
   const productOptions = data.products.map((product: Product) => (
@@ -30,6 +31,9 @@ const StockOut = () => {
 
   return (
     <Layout title="Stock out">
+      <div className="flex justify-center">
+        {data.stockOuts.length === 0 && <p>No Stock Outs</p>}
+      </div>
       <ul>
         {data.stockOuts.map((stockIn) => (
           <li className={commonClassName} key={stockIn.id}>
@@ -42,10 +46,10 @@ const StockOut = () => {
           Product:
           <select
             className={commonClassName}
-            value={newStockIn.productId}
+            value={newStockOut.productId}
             onChange={(e) =>
-              setNewStockIn({
-                ...newStockIn,
+              setNewStockOut({
+                ...newStockOut,
                 productId: e.target.value,
               })
             }
@@ -59,13 +63,19 @@ const StockOut = () => {
           <input
             className={commonClassName}
             type="number"
-            value={newStockIn.qty}
+            value={newStockOut.qty}
             onChange={(e) =>
-              setNewStockIn({ ...newStockIn, qty: parseInt(e.target.value) })
+              setNewStockOut({ ...newStockOut, qty: parseInt(e.target.value) })
             }
           />
         </label>
-        <button className={commonClassName} onClick={handleStockOut}>
+        <button
+          disabled={buttonDisabled}
+          className={classNames(commonClassName, {
+            "bg-gray-200 border-gray-200 cursor-not-allowed": buttonDisabled,
+          })}
+          onClick={handleStockOut}
+        >
           Stock Out
         </button>
       </div>

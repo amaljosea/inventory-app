@@ -16,15 +16,18 @@ const Products = () => {
     qty: 0,
   });
 
+  const buttonDisabled = !(newProduct.name && newProduct.qty);
+
   const handleAddProduct = () => {
-    if (newProduct.name && newProduct.qty) {
-      addProduct(newProduct);
-      setNewProduct({ id: uuidv4(), name: "", qty: 0 });
-    }
+    addProduct(newProduct);
+    setNewProduct({ id: uuidv4(), name: "", qty: 0 });
   };
 
   return (
     <Layout title="Products">
+      <div className="flex justify-center">
+        {data.products.length === 0 && <p>No products</p>}
+      </div>
       <ul>
         {data.products.map((product) => (
           <li
@@ -60,7 +63,13 @@ const Products = () => {
             setNewProduct({ ...newProduct, qty: parseInt(e.target.value) })
           }
         />
-        <button className={commonClassName} onClick={handleAddProduct}>
+        <button
+          disabled={buttonDisabled}
+          className={classNames(commonClassName, {
+            "bg-gray-200 border-gray-200 cursor-not-allowed": buttonDisabled,
+          })}
+          onClick={handleAddProduct}
+        >
           Add Product
         </button>
       </div>
