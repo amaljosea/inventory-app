@@ -1,21 +1,13 @@
 import { commonClassName } from "@/constant";
-import Link from "next/link";
+import CustomLink from "./CustomLink";
 
 const Header = () => {
   return (
     <nav className="flex justify-center">
-      <Link className={commonClassName} href="/">
-        Main
-      </Link>
-      <Link className={commonClassName} href="/products">
-        Products
-      </Link>
-      <Link className={commonClassName} href="/stock-in">
-        Stock In
-      </Link>
-      <Link className={commonClassName} href="/stock-out">
-        Stock Out
-      </Link>
+      <CustomLink href="/">Main</CustomLink>
+      <CustomLink href="/products">Products</CustomLink>
+      <CustomLink href="/stock-in">Stock In</CustomLink>
+      <CustomLink href="/stock-out">Stock Out</CustomLink>
     </nav>
   );
 };

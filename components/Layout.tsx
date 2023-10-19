@@ -12,7 +12,7 @@ const Layout = ({
 }) => {
   return (
     <div className="flex flex-col items-center">
-      <h1 className="mt-10 text-red-700 font-bold ">{title}</h1>
+      <h1 className="mt-10 text-blue-700 font-bold ">{title}</h1>
       <Header />
       <div className={classNames(commonClassName, "drop-shadow-md")}>
         {children}
