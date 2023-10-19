@@ -5,7 +5,7 @@ export interface Product {
 }
 
 export interface StockItem {
-  id: number;
+  id: string;
   productId: number;
   qty: number;
 }
