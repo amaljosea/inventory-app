@@ -2,6 +2,7 @@ import Header from "./Header";
 import { ReactNode } from "react";
 import classNames from "classnames";
 import { commonClassName } from "@/constant";
+import { clearInventoryData } from "@/data/inventoryData";
 
 const Layout = ({
   title,
@@ -17,6 +18,7 @@ const Layout = ({
       <div className={classNames(commonClassName, "drop-shadow-md")}>
         {children}
       </div>
+      <button onClick={clearInventoryData}>Clear Data</button>
     </div>
   );
 };

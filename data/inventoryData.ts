@@ -18,3 +18,8 @@ export function getInventoryData(): InventoryData {
 export function updateInventoryData(newData: InventoryData): void {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newData));
 }
+
+export const clearInventoryData = () => {
+  localStorage.clear();
+  location.reload();
+};
