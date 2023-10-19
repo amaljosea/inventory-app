@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import { useInventory } from "@/context/InventoryContext";
 import { Product, StockItem } from "@/index";
 import React, { useState } from "react";
@@ -28,9 +29,7 @@ const StockOut = () => {
   ));
 
   return (
-    <div>
-      <h1>Stock-In Page</h1>
-      <Header />
+    <Layout title="Stock out">
       <ul>
         {data.stockOuts.map((stockIn) => (
           <li key={stockIn.id}>
@@ -66,7 +65,7 @@ const StockOut = () => {
         </label>
         <button onClick={handleStockOut}>Stock Out</button>
       </div>
-    </div>
+    </Layout>
   );
 };
 

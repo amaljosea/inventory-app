@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import { useInventory } from "@/context/InventoryContext";
 import { Product } from "@/index";
 import React, { useState } from "react";
@@ -22,9 +23,7 @@ const Products = () => {
   };
 
   return (
-    <div>
-      <h1>Products Page</h1>
-      <Header />
+    <Layout title="Products">
       <ul>
         {data.products.map((product) => (
           <li key={product.id}>
@@ -52,7 +51,7 @@ const Products = () => {
         />
         <button onClick={handleAddProduct}>Add Product</button>
       </div>
-    </div>
+    </Layout>
   );
 };
 

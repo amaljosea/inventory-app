@@ -3,6 +3,9 @@ import Link from "next/link";
 const Header = () => {
   return (
     <nav className="flex justify-center">
+      <Link className="" href="/">
+        Main
+      </Link>
       <Link className="" href="/products">
         Products
       </Link>

@@ -1,13 +1,7 @@
-import Header from "@/components/Header";
-import Link from "next/link";
+import Layout from "@/components/Layout";
 
 const Main = () => {
-  return (
-    <div>
-      <h1>Main Page</h1>
-      <Header />
-    </div>
-  );
+  return <Layout title="Main " />;
 };
 
 export default Main;
