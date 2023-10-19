@@ -6,7 +6,7 @@ export interface Product {
 
 export interface StockItem {
   id: string;
-  productId: number;
+  productId: string;
   qty: number;
 }
 

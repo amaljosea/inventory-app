@@ -11,14 +11,14 @@ const StockOut = () => {
   const { data, stockOut } = useInventory();
   const [newStockIn, setNewStockIn] = useState<StockItem>({
     id: uuidv4(),
-    productId: 0,
+    productId: "",
     qty: 0,
   });
 
   const handleStockOut = () => {
     if (newStockIn.productId && newStockIn.qty) {
       stockOut(newStockIn);
-      setNewStockIn({ id: uuidv4(), productId: 0, qty: 0 });
+      setNewStockIn({ id: uuidv4(), productId: "", qty: 0 });
     }
   };
 
@@ -46,7 +46,7 @@ const StockOut = () => {
             onChange={(e) =>
               setNewStockIn({
                 ...newStockIn,
-                productId: parseInt(e.target.value),
+                productId: e.target.value,
               })
             }
           >
