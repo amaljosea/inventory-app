@@ -9,10 +9,14 @@ const Layout = ({
   children?: ReactNode;
 }) => {
   return (
-    <div>
-      <h1>{title}</h1>
+    <div className="flex flex-col items-center">
+      <h1 className="mt-10 text-red-700 font-bold">{title}</h1>
       <Header />
-      {children}
+      {children && (
+        <div className="border-solid border-2 border-indigo-600 m-2 rounded p-2">
+          {children}
+        </div>
+      )}
     </div>
   );
 };
