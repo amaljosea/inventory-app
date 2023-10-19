@@ -1,6 +1,7 @@
 "use client";
 
 import Layout from "@/components/Layout";
+import { commonClassName } from "@/constant";
 import { useInventory } from "@/context/InventoryContext";
 import { Product, StockItem } from "@/index";
 import React, { useState } from "react";
@@ -31,7 +32,7 @@ const StockOut = () => {
     <Layout title="Stock out">
       <ul>
         {data.stockOuts.map((stockIn) => (
-          <li key={stockIn.id}>
+          <li className={commonClassName} key={stockIn.id}>
             Product ID: {stockIn.productId} (Qty: {stockIn.qty})
           </li>
         ))}
@@ -40,6 +41,7 @@ const StockOut = () => {
         <label>
           Product:
           <select
+            className={commonClassName}
             value={newStockIn.productId}
             onChange={(e) =>
               setNewStockIn({
@@ -55,6 +57,7 @@ const StockOut = () => {
         <label>
           Quantity:
           <input
+            className={commonClassName}
             type="number"
             value={newStockIn.qty}
             onChange={(e) =>
@@ -62,7 +65,9 @@ const StockOut = () => {
             }
           />
         </label>
-        <button onClick={handleStockOut}>Stock Out</button>
+        <button className={commonClassName} onClick={handleStockOut}>
+          Stock Out
+        </button>
       </div>
     </Layout>
   );
