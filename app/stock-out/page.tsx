@@ -19,8 +19,16 @@ const StockOut = () => {
   const buttonDisabled = !(newStockOut.productId && newStockOut.qty);
 
   const handleStockOut = () => {
-    stockOut(newStockOut);
-    setNewStockOut({ id: uuidv4(), productId: "", qty: 0 });
+    const product = data.products.find(
+      (p) => p.id === newStockOut.productId
+    ) as Product;
+
+    if (product?.qty >= newStockOut.qty) {
+      stockOut(newStockOut);
+      setNewStockOut({ id: uuidv4(), productId: "", qty: 0 });
+    } else {
+      alert("Sorry, there is no enough products to stock out!");
+    }
   };
 
   const productOptions = data.products.map((product: Product) => (

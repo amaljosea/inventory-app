@@ -53,14 +53,38 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
 
   const stockIn = (stock: StockItem) => {
     const updatedStockins = [...data.stockIns, stock];
-    const updatedData = { ...data, stockIns: updatedStockins };
+    const updatedData = {
+      ...data,
+      stockIns: updatedStockins,
+      products: data.products.map((product) => {
+        if (product.id === stock.productId) {
+          return {
+            ...product,
+            qty: product.qty + stock.qty,
+          };
+        }
+        return product;
+      }),
+    };
     setData(updatedData);
     updateInventoryData(updatedData);
   };
 
   const stockOut = (stock: StockItem) => {
     const updatedStockouts = [...data.stockOuts, stock];
-    const updatedData = { ...data, stockOuts: updatedStockouts };
+    const updatedData = {
+      ...data,
+      stockOuts: updatedStockouts,
+      products: data.products.map((product) => {
+        if (product.id === stock.productId) {
+          return {
+            ...product,
+            qty: product.qty - stock.qty,
+          };
+        }
+        return product;
+      }),
+    };
     setData(updatedData);
     updateInventoryData(updatedData);
   };
