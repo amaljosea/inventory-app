@@ -27,6 +27,7 @@ interface Props {
 }
 
 export const InventoryProvider: React.FC<Props> = ({ children }) => {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState<InventoryData>({
     products: [],
     stockIns: [],
@@ -36,6 +37,7 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const inventoryData = getInventoryData();
+      setLoading(false);
       setData(inventoryData);
     };
 
@@ -72,6 +74,9 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
     updateInventoryData(updatedData);
   };
 
+  if (loading) {
+    return "Loading...";
+  }
   return (
     <InventoryContext.Provider
       value={{ data, addProduct, deleteProduct, stockIn, stockOut }}
