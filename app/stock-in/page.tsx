@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/Header";
 import { useInventory } from "@/context/InventoryContext";
 import { Product, StockItem } from "@/index";
 import React, { useState } from "react";
@@ -29,6 +30,7 @@ const StockIn = () => {
   return (
     <div>
       <h1>Stock-In Page</h1>
+      <Header />
       <ul>
         {data.stockIns.map((stockIn) => (
           <li key={stockIn.id}>

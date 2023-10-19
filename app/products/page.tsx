@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/Header";
 import { useInventory } from "@/context/InventoryContext";
 import { Product } from "@/index";
 import React, { useState } from "react";
@@ -23,6 +24,7 @@ const Products = () => {
   return (
     <div>
       <h1>Products Page</h1>
+      <Header />
       <ul>
         {data.products.map((product) => (
           <li key={product.id}>
