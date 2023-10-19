@@ -1,8 +1,10 @@
 "use client";
 
 import Layout from "@/components/Layout";
+import { commonClassName } from "@/constant";
 import { useInventory } from "@/context/InventoryContext";
 import { Product } from "@/index";
+import classNames from "classnames";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -26,7 +28,7 @@ const Products = () => {
       <ul>
         {data.products.map((product) => (
           <li
-            className="border-solid border-2 border-indigo-600 m-2 rounded p-2 flex justify-between"
+            className={classNames(commonClassName, "flex justify-between")}
             key={product.id}
           >
             {product.name} (Qty: {product.qty})
@@ -39,9 +41,9 @@ const Products = () => {
           </li>
         ))}
       </ul>
-      <div className="border-solid border-2 border-indigo-600 m-2 rounded p-2">
+      <div className={commonClassName}>
         <input
-          className="border-solid border-2 border-indigo-600 m-2 rounded p-2"
+          className={commonClassName}
           type="text"
           placeholder="Product Name"
           value={newProduct.name}
@@ -50,7 +52,7 @@ const Products = () => {
           }
         />
         <input
-          className="border-solid border-2 border-indigo-600 m-2 rounded p-2"
+          className={commonClassName}
           type="number"
           placeholder="Available Quantity"
           value={newProduct.qty}
@@ -58,10 +60,7 @@ const Products = () => {
             setNewProduct({ ...newProduct, qty: parseInt(e.target.value) })
           }
         />
-        <button
-          className="border-solid border-2 border-indigo-600 m-2 rounded p-2"
-          onClick={handleAddProduct}
-        >
+        <button className={commonClassName} onClick={handleAddProduct}>
           Add Product
         </button>
       </div>

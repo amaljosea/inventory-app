@@ -1,5 +1,7 @@
 import Header from "./Header";
 import { ReactNode } from "react";
+import classNames from "classnames";
+import { commonClassName } from "@/constant";
 
 const Layout = ({
   title,
@@ -12,7 +14,7 @@ const Layout = ({
     <div className="flex flex-col items-center">
       <h1 className="mt-10 text-red-700 font-bold ">{title}</h1>
       <Header />
-      <div className="border-solid border-2 border-grey-600 m-2 rounded p-2 drop-shadow-md">
+      <div className={classNames(commonClassName, "drop-shadow-md")}>
         {children}
       </div>
     </div>
