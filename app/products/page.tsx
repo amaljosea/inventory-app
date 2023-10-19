@@ -3,11 +3,12 @@
 import { useInventory } from "@/context/InventoryContext";
 import { Product } from "@/index";
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Products = () => {
   const { data, addProduct, deleteProduct } = useInventory();
   const [newProduct, setNewProduct] = useState<Product>({
-    id: 0,
+    id: uuidv4(),
     name: "",
     qty: 0,
   });
@@ -15,7 +16,7 @@ const Products = () => {
   const handleAddProduct = () => {
     if (newProduct.name && newProduct.qty) {
       addProduct(newProduct);
-      setNewProduct({ id: 0, name: "", qty: 0 });
+      setNewProduct({ id: uuidv4(), name: "", qty: 0 });
     }
   };
 

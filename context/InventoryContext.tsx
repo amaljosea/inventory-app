@@ -13,7 +13,7 @@ interface InventoryData {
 interface InventoryContextType {
   data: InventoryData;
   addProduct: (product: Product) => void;
-  deleteProduct: (productId: number) => void;
+  deleteProduct: (productId: string) => void;
 }
 
 const InventoryContext = createContext<InventoryContextType | undefined>(
@@ -48,7 +48,7 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
     updateInventoryData(updatedData);
   };
 
-  const deleteProduct = (productId: number) => {
+  const deleteProduct = (productId: string) => {
     // Implement logic to delete a product
     const updatedProducts = data.products.filter(
       (product) => product.id !== productId
