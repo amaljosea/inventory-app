@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Product, StockItem } from "..";
 import { getInventoryData, updateInventoryData } from "@/data/inventoryData";
