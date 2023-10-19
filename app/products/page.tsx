@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import Layout from "@/components/Layout";
 import { useInventory } from "@/context/InventoryContext";
 import { Product } from "@/index";
