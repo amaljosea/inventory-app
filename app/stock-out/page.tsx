@@ -5,17 +5,17 @@ import { Product, StockItem } from "@/index";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const StockIn = () => {
-  const { data, stockIn } = useInventory();
+const StockOut = () => {
+  const { data, stockOut } = useInventory();
   const [newStockIn, setNewStockIn] = useState<StockItem>({
     id: uuidv4(),
     productId: 0,
     qty: 0,
   });
 
-  const handleStockIn = () => {
+  const handleStockOut = () => {
     if (newStockIn.productId && newStockIn.qty) {
-      stockIn(newStockIn);
+      stockOut(newStockIn);
       setNewStockIn({ id: uuidv4(), productId: 0, qty: 0 });
     }
   };
@@ -30,7 +30,7 @@ const StockIn = () => {
     <div>
       <h1>Stock-In Page</h1>
       <ul>
-        {data.stockIns.map((stockIn) => (
+        {data.stockOuts.map((stockIn) => (
           <li key={stockIn.id}>
             Product ID: {stockIn.productId} (Qty: {stockIn.qty})
           </li>
@@ -62,10 +62,10 @@ const StockIn = () => {
             }
           />
         </label>
-        <button onClick={handleStockIn}>Stock In</button>
+        <button onClick={handleStockOut}>Stock Out</button>
       </div>
     </div>
   );
 };
 
-export default StockIn;
+export default StockOut;
