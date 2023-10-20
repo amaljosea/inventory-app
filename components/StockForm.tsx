@@ -14,7 +14,7 @@ export const defaultStock = {
 };
 
 export type StockFormProps = {
-  handleSubmit: () => void;
+  handleSubmit: (stock: StockItem) => void;
   title: string;
 };
 
@@ -64,7 +64,9 @@ export const StockForm = ({ handleSubmit, title }: StockFormProps) => {
         className={classNames(commonClassName, {
           "bg-gray-200 border-gray-200 cursor-not-allowed": buttonDisabled,
         })}
-        onClick={handleSubmit}
+        onClick={() => {
+          handleSubmit(newStock);
+        }}
       >
         {title}
       </button>
