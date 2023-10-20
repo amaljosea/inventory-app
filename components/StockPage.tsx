@@ -2,11 +2,11 @@
 
 import Layout from "@/components/Layout";
 import { StockFormProps, StockForm } from "@/components/StockForm";
-import { commonClassName } from "@/constant";
 import { useInventory } from "@/context/InventoryContext";
 import { StockItem } from "@/index";
 import classNames from "classnames";
 import React, { useMemo } from "react";
+import { StockCard } from "./StockCard";
 
 type StockPageProps = {
   stocks: StockItem[];
@@ -26,6 +26,8 @@ const StockPage = ({ stocks, handleSubmit, title }: StockPageProps) => {
     [data]
   );
 
+  const reversedStock = [...stocks].reverse();
+
   return (
     <Layout title={title}>
       {stocks.length === 0 ? (
@@ -35,22 +37,31 @@ const StockPage = ({ stocks, handleSubmit, title }: StockPageProps) => {
       ) : (
         <ul>
           <li className={classNames("p-2 flex justify-between")}>
-            <span className="flex-1">Name</span>
-            <span className="flex-1">Id</span>
-            <span className="flex-1">Quantity</span>
+            <span className="flex-1 p-2">Name</span>
+            <span className="flex-1 p-2">Id</span>
+            <span className="flex-1 p-2">Quantity</span>
+            <span className="flex-1 p-2">Created time</span>
           </li>
-          {stocks.map((stock) => (
-            <li
-              className={classNames(commonClassName, "flex justify-between")}
+          <p className="p-2">Latest</p>
+          {reversedStock.slice(0, 10).map((stock) => (
+            <StockCard
               key={stock.id}
-            >
-              <span className="flex-1">
-                {productIdToNameMap[stock.productId] || "Deleted product"}
-              </span>
-              <span className="flex-1">{stock.id}</span>
-              <span className="flex-1">{stock.qty}</span>
-            </li>
+              name={productIdToNameMap[stock.productId]}
+              stock={stock}
+            />
           ))}
+          {reversedStock.length > 10 && (
+            <>
+              <p className="p-2">Old stock</p>
+              {reversedStock.slice(10).map((stock) => (
+                <StockCard
+                  key={stock.id}
+                  name={productIdToNameMap[stock.productId]}
+                  stock={stock}
+                />
+              ))}
+            </>
+          )}
         </ul>
       )}
       <StockForm handleSubmit={handleSubmit} title={title} />

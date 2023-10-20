@@ -4,7 +4,10 @@ import { commonClassName } from "@/constant";
 import { useInventory } from "@/context/InventoryContext";
 import classNames from "classnames";
 import React from "react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
+dayjs.extend(relativeTime);
 export const ProductList = () => {
   const { data, deleteProduct } = useInventory();
 
@@ -17,19 +20,23 @@ export const ProductList = () => {
       ) : (
         <ul>
           <li className={classNames("p-2 flex justify-between")}>
-            <span className="flex-1">Id</span>
-            <span className="flex-1">Name</span>
-            <span className="flex-1">Quantity</span>
-            <span className="flex-1" />
+            <span className="flex-1 p-2">Id</span>
+            <span className="flex-1 p-2">Name</span>
+            <span className="flex-1 p-2">Quantity</span>
+            <span className="flex-1 p-2">Updated time</span>
+            <span className="flex-1 p-2" />
           </li>
           {data.products.map((product) => (
             <li
               className={classNames(commonClassName, "flex justify-between")}
               key={product.id}
             >
-              <span className="flex-1">{product.id}</span>
-              <span className="flex-1">{product.name}</span>
-              <span className="flex-1">{product.qty}</span>
+              <span className="flex-1 p-2">{product.id}</span>
+              <span className="flex-1 p-2">{product.name}</span>
+              <span className="flex-1 p-2">{product.qty}</span>
+              <span className="flex-1 p-2">
+                {dayjs(product.time).fromNow()}
+              </span>
               <button
                 className="text-red-700 font-bold flex-1"
                 onClick={() => deleteProduct(product.id)}

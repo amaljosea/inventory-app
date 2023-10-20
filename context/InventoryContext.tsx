@@ -53,7 +53,10 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
 
   const addProduct = useCallback(
     (product: Product) => {
-      const updatedProducts = [...data.products, product];
+      const updatedProducts = [
+        ...data.products,
+        { ...product, time: new Date().toString() },
+      ];
       const updatedData = { ...data, products: updatedProducts };
       setData(updatedData);
       updateInventoryData(updatedData);
@@ -63,7 +66,13 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
 
   const stockIn = useCallback(
     (stock: StockItem) => {
-      const updatedStockins = [...data.stockIns, stock];
+      const updatedStockins = [
+        ...data.stockIns,
+        {
+          ...stock,
+          time: new Date().toString(),
+        },
+      ];
       const updatedData = {
         ...data,
         stockIns: updatedStockins,
@@ -72,6 +81,7 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
             return {
               ...product,
               qty: product.qty + stock.qty,
+              time: new Date().toString(),
             };
           }
           return product;
@@ -85,7 +95,10 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
 
   const stockOut = useCallback(
     (stock: StockItem) => {
-      const updatedStockouts = [...data.stockOuts, stock];
+      const updatedStockouts = [
+        ...data.stockOuts,
+        { ...stock, time: new Date().toString() },
+      ];
       const updatedData = {
         ...data,
         stockOuts: updatedStockouts,
@@ -94,6 +107,7 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
             return {
               ...product,
               qty: product.qty - stock.qty,
+              time: new Date(),
             };
           }
           return product;
