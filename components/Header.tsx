@@ -1,4 +1,3 @@
-import { commonClassName } from "@/constant";
 import CustomLink from "./CustomLink";
 
 const Header = () => {

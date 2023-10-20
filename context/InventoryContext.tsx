@@ -133,9 +133,7 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
   }
 
   return (
-    <InventoryContext.Provider
-      value={{ data, addProduct, deleteProduct, stockIn, stockOut }}
-    >
+    <InventoryContext.Provider value={value}>
       {children}
     </InventoryContext.Provider>
   );
