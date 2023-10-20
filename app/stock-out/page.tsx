@@ -13,10 +13,10 @@ const StockOut = () => {
       (p) => p.id === newStockOut.productId
     ) as Product;
 
-    if (product?.qty >= newStockOut.qty) {
+    if (product.qty >= newStockOut.qty) {
       stockOut(newStockOut);
     } else {
-      alert("Sorry, there is no enough products to stock out!");
+      alert(`Sorry, there is only ${product.qty} products to stock out!`);
     }
   };
 
