@@ -17,6 +17,7 @@ export const ProductList = () => {
       ) : (
         <ul>
           <li className={classNames("p-2 flex justify-between")}>
+            <span className="flex-1">Id</span>
             <span className="flex-1">Name</span>
             <span className="flex-1">Quantity</span>
             <span className="flex-1" />
@@ -26,6 +27,7 @@ export const ProductList = () => {
               className={classNames(commonClassName, "flex justify-between")}
               key={product.id}
             >
+              <span className="flex-1">{product.id}</span>
               <span className="flex-1">{product.name}</span>
               <span className="flex-1">{product.qty}</span>
               <button

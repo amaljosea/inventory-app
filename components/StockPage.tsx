@@ -35,18 +35,20 @@ const StockPage = ({ stocks, handleSubmit, title }: StockPageProps) => {
       ) : (
         <ul>
           <li className={classNames("p-2 flex justify-between")}>
-            <span>Name</span>
-            <span>Quantity</span>
+            <span className="flex-1">Name</span>
+            <span className="flex-1">Id</span>
+            <span className="flex-1">Quantity</span>
           </li>
           {stocks.map((stock) => (
             <li
               className={classNames(commonClassName, "flex justify-between")}
               key={stock.id}
             >
-              <span>
+              <span className="flex-1">
                 {productIdToNameMap[stock.productId] || "Deleted product"}
               </span>
-              <span>{stock.qty}</span>
+              <span className="flex-1">{stock.id}</span>
+              <span className="flex-1">{stock.qty}</span>
             </li>
           ))}
         </ul>
