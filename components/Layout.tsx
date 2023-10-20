@@ -13,9 +13,9 @@ const Layout = ({
 }) => {
   return (
     <div className="flex flex-col items-center">
-      <h1 className="mt-10 text-blue-700 font-bold ">{title}</h1>
+      <h1 className="mt-10 text-indigo-700 font-bold ">{title}</h1>
       <Header />
-      <div className={classNames(commonClassName, "drop-shadow-md")}>
+      <div className={classNames(commonClassName, "drop-shadow-md w-[90%]")}>
         {children}
       </div>
       <button onClick={clearInventoryData}>Clear Data</button>

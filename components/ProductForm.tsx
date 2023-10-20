@@ -25,7 +25,9 @@ const ProductForm = () => {
   };
 
   return (
-    <div className={commonClassName}>
+    <div
+      className={classNames(commonClassName, "bg-indigo-500 flex justify-end")}
+    >
       <input
         className={commonClassName}
         type="text"

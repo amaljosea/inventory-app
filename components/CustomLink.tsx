@@ -16,7 +16,7 @@ const CustomLink = ({
   return (
     <Link
       className={classNames(commonClassName, {
-        "bg-blue-700 text-white": isActive,
+        "bg-indigo-700 text-white": isActive,
       })}
       href={href}
     >
