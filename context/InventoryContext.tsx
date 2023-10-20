@@ -1,6 +1,13 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import { Product, StockItem } from "..";
 import { getInventoryData, updateInventoryData } from "@/data/inventoryData";
 
@@ -44,63 +51,87 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
     fetchData();
   }, []);
 
-  const addProduct = (product: Product) => {
-    const updatedProducts = [...data.products, product];
-    const updatedData = { ...data, products: updatedProducts };
-    setData(updatedData);
-    updateInventoryData(updatedData);
-  };
+  const addProduct = useCallback(
+    (product: Product) => {
+      const updatedProducts = [...data.products, product];
+      const updatedData = { ...data, products: updatedProducts };
+      setData(updatedData);
+      updateInventoryData(updatedData);
+    },
+    [data]
+  );
 
-  const stockIn = (stock: StockItem) => {
-    const updatedStockins = [...data.stockIns, stock];
-    const updatedData = {
-      ...data,
-      stockIns: updatedStockins,
-      products: data.products.map((product) => {
-        if (product.id === stock.productId) {
-          return {
-            ...product,
-            qty: product.qty + stock.qty,
-          };
-        }
-        return product;
-      }),
-    };
-    setData(updatedData);
-    updateInventoryData(updatedData);
-  };
+  const stockIn = useCallback(
+    (stock: StockItem) => {
+      const updatedStockins = [...data.stockIns, stock];
+      const updatedData = {
+        ...data,
+        stockIns: updatedStockins,
+        products: data.products.map((product) => {
+          if (product.id === stock.productId) {
+            return {
+              ...product,
+              qty: product.qty + stock.qty,
+            };
+          }
+          return product;
+        }),
+      };
+      setData(updatedData);
+      updateInventoryData(updatedData);
+    },
+    [data]
+  );
 
-  const stockOut = (stock: StockItem) => {
-    const updatedStockouts = [...data.stockOuts, stock];
-    const updatedData = {
-      ...data,
-      stockOuts: updatedStockouts,
-      products: data.products.map((product) => {
-        if (product.id === stock.productId) {
-          return {
-            ...product,
-            qty: product.qty - stock.qty,
-          };
-        }
-        return product;
-      }),
-    };
-    setData(updatedData);
-    updateInventoryData(updatedData);
-  };
+  const stockOut = useCallback(
+    (stock: StockItem) => {
+      const updatedStockouts = [...data.stockOuts, stock];
+      const updatedData = {
+        ...data,
+        stockOuts: updatedStockouts,
+        products: data.products.map((product) => {
+          if (product.id === stock.productId) {
+            return {
+              ...product,
+              qty: product.qty - stock.qty,
+            };
+          }
+          return product;
+        }),
+      };
+      setData(updatedData);
+      updateInventoryData(updatedData);
+    },
+    [data]
+  );
 
-  const deleteProduct = (productId: string) => {
-    const updatedProducts = data.products.filter(
-      (product) => product.id !== productId
-    );
-    const updatedData = { ...data, products: updatedProducts };
-    setData(updatedData);
-    updateInventoryData(updatedData);
-  };
+  const deleteProduct = useCallback(
+    (productId: string) => {
+      const updatedProducts = data.products.filter(
+        (product) => product.id !== productId
+      );
+      const updatedData = { ...data, products: updatedProducts };
+      setData(updatedData);
+      updateInventoryData(updatedData);
+    },
+    [data]
+  );
+
+  const value = useMemo(
+    () => ({
+      data,
+      addProduct,
+      deleteProduct,
+      stockIn,
+      stockOut,
+    }),
+    [data, addProduct, deleteProduct, stockIn, stockOut]
+  );
 
   if (loading) {
     return "Loading...";
   }
+
   return (
     <InventoryContext.Provider
       value={{ data, addProduct, deleteProduct, stockIn, stockOut }}
@@ -110,7 +141,6 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
   );
 };
 
-// Custom hook to use the context
 export const useInventory = () => {
   const context = useContext(InventoryContext);
   if (!context) {
