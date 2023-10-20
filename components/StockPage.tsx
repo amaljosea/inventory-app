@@ -5,6 +5,7 @@ import { StockFormProps, StockForm } from "@/components/StockForm";
 import { commonClassName } from "@/constant";
 import { useInventory } from "@/context/InventoryContext";
 import { StockItem } from "@/index";
+import classNames from "classnames";
 import React from "react";
 
 type StockPageProps = {
@@ -29,8 +30,14 @@ const StockPage = ({ stocks, handleSubmit, title }: StockPageProps) => {
       </div>
       <ul>
         {stocks.map((stock) => (
-          <li className={commonClassName} key={stock.id}>
-            Product: {productIdToNameMap[stock.productId]} (Qtys: {stock.qty})
+          <li
+            className={classNames(commonClassName, "flex justify-between")}
+            key={stock.id}
+          >
+            <span>
+              {productIdToNameMap[stock.productId] || "Deleted product"}
+            </span>
+            <span>{stock.qty}</span>
           </li>
         ))}
       </ul>

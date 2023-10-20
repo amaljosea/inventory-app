@@ -19,7 +19,8 @@ export const ProductList = () => {
             className={classNames(commonClassName, "flex justify-between")}
             key={product.id}
           >
-            {product.name} (Qty: {product.qty})
+            <span>{product.name}</span>
+            <span>{product.qty}</span>
             <button
               className="text-red-700 font-bold"
               onClick={() => deleteProduct(product.id)}

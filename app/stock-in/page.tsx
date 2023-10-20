@@ -3,7 +3,7 @@
 import StockPage from "@/components/StockPage";
 import { useInventory } from "@/context/InventoryContext";
 import { StockItem } from "@/index";
-import React, { useState } from "react";
+import React from "react";
 
 const StockIn = () => {
   const { data, stockIn } = useInventory();

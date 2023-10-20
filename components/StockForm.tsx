@@ -66,6 +66,7 @@ export const StockForm = ({ handleSubmit, title }: StockFormProps) => {
         })}
         onClick={() => {
           handleSubmit(newStock);
+          setNewStock(defaultStock);
         }}
       >
         {title}
