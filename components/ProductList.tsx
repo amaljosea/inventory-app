@@ -10,26 +10,34 @@ export const ProductList = () => {
 
   return (
     <>
-      <div className="flex justify-center">
-        {data.products.length === 0 && <p>No products</p>}
-      </div>
-      <ul>
-        {data.products.map((product) => (
-          <li
-            className={classNames(commonClassName, "flex justify-between")}
-            key={product.id}
-          >
-            <span>{product.name}</span>
-            <span>{product.qty}</span>
-            <button
-              className="text-red-700 font-bold"
-              onClick={() => deleteProduct(product.id)}
-            >
-              Delete
-            </button>
+      {!data.products.length ? (
+        <div className="flex justify-center">
+          <p>No products</p>
+        </div>
+      ) : (
+        <ul>
+          <li className={classNames("p-2 flex justify-between")}>
+            <span>Name</span>
+            <span>Quantity</span>
+            <span />
           </li>
-        ))}
-      </ul>
+          {data.products.map((product) => (
+            <li
+              className={classNames(commonClassName, "flex justify-between")}
+              key={product.id}
+            >
+              <span>{product.name}</span>
+              <span>{product.qty}</span>
+              <button
+                className="text-red-700 font-bold"
+                onClick={() => deleteProduct(product.id)}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };

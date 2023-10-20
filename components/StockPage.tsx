@@ -25,22 +25,29 @@ const StockPage = ({ stocks, handleSubmit, title }: StockPageProps) => {
 
   return (
     <Layout title={title}>
-      <div className="flex justify-center">
-        {stocks.length === 0 && <p>No {title}</p>}
-      </div>
-      <ul>
-        {stocks.map((stock) => (
-          <li
-            className={classNames(commonClassName, "flex justify-between")}
-            key={stock.id}
-          >
-            <span>
-              {productIdToNameMap[stock.productId] || "Deleted product"}
-            </span>
-            <span>{stock.qty}</span>
+      {stocks.length === 0 ? (
+        <div className="flex justify-center">
+          <p>No {title}</p>
+        </div>
+      ) : (
+        <ul>
+          <li className={classNames("p-2 flex justify-between")}>
+            <span>Name</span>
+            <span>Quantity</span>
           </li>
-        ))}
-      </ul>
+          {stocks.map((stock) => (
+            <li
+              className={classNames(commonClassName, "flex justify-between")}
+              key={stock.id}
+            >
+              <span>
+                {productIdToNameMap[stock.productId] || "Deleted product"}
+              </span>
+              <span>{stock.qty}</span>
+            </li>
+          ))}
+        </ul>
+      )}
       <StockForm handleSubmit={handleSubmit} title={title} />
     </Layout>
   );
