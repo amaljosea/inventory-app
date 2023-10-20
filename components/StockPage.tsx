@@ -6,22 +6,25 @@ import { commonClassName } from "@/constant";
 import { useInventory } from "@/context/InventoryContext";
 import { StockItem } from "@/index";
 import classNames from "classnames";
-import React from "react";
+import React, { useMemo } from "react";
 
 type StockPageProps = {
   stocks: StockItem[];
 } & StockFormProps;
 
 type ProductIdToNameMapType = { [key: string]: string };
-const initialProductIdToNameMap = {} as ProductIdToNameMapType;
 
 const StockPage = ({ stocks, handleSubmit, title }: StockPageProps) => {
   const { data } = useInventory();
 
-  const productIdToNameMap = data.products.reduce((acc, item) => {
-    acc[item.id] = item.name;
-    return acc;
-  }, initialProductIdToNameMap);
+  const productIdToNameMap = useMemo(
+    () =>
+      data.products.reduce((acc, item) => {
+        acc[item.id] = item.name;
+        return acc;
+      }, {} as ProductIdToNameMapType),
+    [data]
+  );
 
   return (
     <Layout title={title}>
