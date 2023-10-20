@@ -7,11 +7,11 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export const defaultStock = {
+export const getDefaultStock = () => ({
   id: uuidv4(),
   productId: "",
   qty: 0,
-};
+});
 
 export type StockFormProps = {
   handleSubmit: (stock: StockItem) => void;
@@ -20,7 +20,7 @@ export type StockFormProps = {
 
 export const StockForm = ({ handleSubmit, title }: StockFormProps) => {
   const { data } = useInventory();
-  const [newStock, setNewStock] = useState<StockItem>(defaultStock);
+  const [newStock, setNewStock] = useState<StockItem>(getDefaultStock());
 
   const buttonDisabled = !(newStock.productId && newStock.qty);
 
@@ -51,6 +51,7 @@ export const StockForm = ({ handleSubmit, title }: StockFormProps) => {
       <label>
         Quantity:
         <input
+          min={0}
           className={commonClassName}
           type="number"
           value={newStock.qty}
@@ -66,7 +67,7 @@ export const StockForm = ({ handleSubmit, title }: StockFormProps) => {
         })}
         onClick={() => {
           handleSubmit(newStock);
-          setNewStock(defaultStock);
+          setNewStock(getDefaultStock());
         }}
       >
         {title}
