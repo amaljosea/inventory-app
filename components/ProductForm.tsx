@@ -14,12 +14,16 @@ const getDefaultProduct = () => ({
 });
 
 const ProductForm = () => {
-  const { addProduct } = useInventory();
+  const { addProduct, data } = useInventory();
   const [newProduct, setNewProduct] = useState<Product>(getDefaultProduct());
 
   const buttonDisabled = !(newProduct.name && newProduct.qty);
 
   const handleAddProduct = () => {
+    if (data.products.find((i) => i.name === newProduct.name)) {
+      alert(`${newProduct.name} already exists`);
+      return;
+    }
     addProduct(newProduct);
     setNewProduct(getDefaultProduct());
   };
