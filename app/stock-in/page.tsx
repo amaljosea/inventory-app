@@ -8,19 +8,21 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+const defaultStock = {
+  id: uuidv4(),
+  productId: "",
+  qty: 0,
+};
+
 const StockIn = () => {
   const { data, stockIn } = useInventory();
-  const [newStockIn, setNewStockIn] = useState<StockItem>({
-    id: uuidv4(),
-    productId: "",
-    qty: 0,
-  });
+  const [newStockIn, setNewStockIn] = useState<StockItem>(defaultStock);
 
   const buttonDisabled = !(newStockIn.productId && newStockIn.qty);
 
   const handleStockIn = () => {
     stockIn(newStockIn);
-    setNewStockIn({ id: uuidv4(), productId: "", qty: 0 });
+    setNewStockIn(defaultStock);
   };
 
   const productOptions = data.products.map((product: Product) => (
