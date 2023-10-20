@@ -33,6 +33,7 @@ const ProductForm = () => {
     >
       <label>
         Name
+        <br />
         <input
           className={commonClassName}
           type="text"
@@ -45,6 +46,7 @@ const ProductForm = () => {
       </label>
       <label>
         Quantity
+        <br />
         <input
           className={commonClassName}
           type="number"

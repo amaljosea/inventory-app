@@ -34,11 +34,12 @@ export const StockForm = ({ handleSubmit, title }: StockFormProps) => {
     <div
       className={classNames(
         commonClassName,
-        "bg-indigo-500 flex sm:flex-row flex-col"
+        "bg-indigo-500 flex sm:flex-row flex-col justify-end"
       )}
     >
       <label>
         Product:
+        <br />
         <select
           className={commonClassName}
           value={newStock.productId}
@@ -55,6 +56,7 @@ export const StockForm = ({ handleSubmit, title }: StockFormProps) => {
       </label>
       <label>
         Quantity:
+        <br />
         <input
           min={0}
           className={commonClassName}
