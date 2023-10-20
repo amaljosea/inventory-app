@@ -17,19 +17,19 @@ export const ProductList = () => {
       ) : (
         <ul>
           <li className={classNames("p-2 flex justify-between")}>
-            <span>Name</span>
-            <span>Quantity</span>
-            <span />
+            <span className="flex-1">Name</span>
+            <span className="flex-1">Quantity</span>
+            <span className="flex-1" />
           </li>
           {data.products.map((product) => (
             <li
               className={classNames(commonClassName, "flex justify-between")}
               key={product.id}
             >
-              <span>{product.name}</span>
-              <span>{product.qty}</span>
+              <span className="flex-1">{product.name}</span>
+              <span className="flex-1">{product.qty}</span>
               <button
-                className="text-red-700 font-bold"
+                className="text-red-700 font-bold flex-1"
                 onClick={() => deleteProduct(product.id)}
               >
                 Delete
