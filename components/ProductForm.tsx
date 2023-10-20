@@ -26,24 +26,35 @@ const ProductForm = () => {
 
   return (
     <div
-      className={classNames(commonClassName, "bg-indigo-500 flex justify-end")}
+      className={classNames(
+        commonClassName,
+        "bg-indigo-500 flex justify-end sm:flex-row flex-col"
+      )}
     >
-      <input
-        className={commonClassName}
-        type="text"
-        placeholder="Product Name"
-        value={newProduct.name}
-        onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-      />
-      <input
-        className={commonClassName}
-        type="number"
-        placeholder="Available Quantity"
-        value={newProduct.qty}
-        onChange={(e) =>
-          setNewProduct({ ...newProduct, qty: parseInt(e.target.value) })
-        }
-      />
+      <label>
+        Name
+        <input
+          className={commonClassName}
+          type="text"
+          placeholder="Product Name"
+          value={newProduct.name}
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, name: e.target.value })
+          }
+        />
+      </label>
+      <label>
+        Quantity
+        <input
+          className={commonClassName}
+          type="number"
+          placeholder="Available Quantity"
+          value={newProduct.qty}
+          onChange={(e) =>
+            setNewProduct({ ...newProduct, qty: parseInt(e.target.value) })
+          }
+        />
+      </label>
       <button
         disabled={buttonDisabled}
         className={classNames(commonClassName, {

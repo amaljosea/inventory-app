@@ -32,7 +32,10 @@ export const StockForm = ({ handleSubmit, title }: StockFormProps) => {
 
   return (
     <div
-      className={classNames(commonClassName, "bg-indigo-500 flex justify-end")}
+      className={classNames(
+        commonClassName,
+        "bg-indigo-500 flex sm:flex-row flex-col"
+      )}
     >
       <label>
         Product:
