@@ -38,7 +38,6 @@ const StockPage = ({ stocks, handleSubmit, title }: StockPageProps) => {
         <ul>
           <li className={classNames("p-2 flex justify-between")}>
             <span className="flex-1 p-2">Name</span>
-            <span className="flex-1 p-2">Id</span>
             <span className="flex-1 p-2">Quantity</span>
             <span className="flex-1 p-2">Created time</span>
           </li>

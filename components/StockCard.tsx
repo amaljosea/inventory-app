@@ -21,7 +21,6 @@ export const StockCard = ({
   return (
     <li className={classNames(commonClassName, "flex justify-between")}>
       <span className="flex-1 p-2">{name}</span>
-      <span className="flex-1 p-2">{stock.id}</span>
       <span className="flex-1 p-2">{stock.qty}</span>
       <span className="flex-1 p-2">{dayjs(stock.time).fromNow()}</span>
     </li>
