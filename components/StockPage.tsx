@@ -41,7 +41,7 @@ const StockPage = ({ stocks, handleSubmit, title }: StockPageProps) => {
             <span className="flex-1 p-2">Quantity</span>
             <span className="flex-1 p-2">Created time</span>
           </li>
-          <p className="p-2">Latest</p>
+          {reversedStock.length > 10 && <p className="p-2">Latest</p>}
           {reversedStock.slice(0, 10).map((stock) => (
             <StockCard
               key={stock.id}
