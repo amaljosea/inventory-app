@@ -11,6 +11,7 @@ const getDefaultProduct = () => ({
   id: uuidv4(),
   name: "",
   qty: 0,
+  time: new Date().toString(),
 });
 
 const ProductForm = () => {

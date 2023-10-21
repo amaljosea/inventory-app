@@ -11,6 +11,7 @@ export const getDefaultStock = () => ({
   id: uuidv4(),
   productId: "",
   qty: 0,
+  time: new Date().toString(),
 });
 
 export type StockFormProps = {
