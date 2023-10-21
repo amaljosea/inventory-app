@@ -107,7 +107,7 @@ export const InventoryProvider: React.FC<Props> = ({ children }) => {
             return {
               ...product,
               qty: product.qty - stock.qty,
-              time: new Date(),
+              time: new Date().toString(),
             };
           }
           return product;
